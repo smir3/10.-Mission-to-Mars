@@ -20,7 +20,10 @@ def scrape_all():
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
         "last_modified": dt.datetime.now()
+        "hemispheres" : hemisphere_data(browser)
     }
+    
+    
 
     # Stop webdriver and return data
     browser.quit()
@@ -81,6 +84,53 @@ def hemisphere_data(browser):
     # Visit URL
     url = 'https://marshemispheres.com/'
     browser.visit(url)
+    
+    # 2. Create a list to hold the images and titles.
+    hemisphere_image_urls = []
+    hemisphere_image_title = []
+    
+    # 3. Write code to retrieve the image urls and titles for each hemisphere. browser.find_by_css gets all 
+    #hemispheres
+    # First, get a list of all of the hemispheres
+    links = browser.find_by_css('a.product-item h3')
+    
+    # Next, loop through those links, click the link, find the sample anchor, return the href
+    for i in range(len(links)): 
+    try:
+
+        links = browser.find_by_css('a.product-item h3')
+
+        # We have to find the elements on each loop to avoid a stale element exception
+        links[i].click()
+
+        # Next, we find the Sample image anchor tag and extract the href
+        imgs_href = browser.find_link_by_partial_text('Sample').first['href']
+
+        # Get Hemisphere title
+        title = browser.find_by_css('h2.title').text
+
+        # Append hemisphere object to list
+        hemisphere_image_urls.append(imgs_href)
+        hemisphere_image_title.append(title)
+
+        # Finally, we navigate backwards
+        browser.back()
+
+    except:
+        break
+
+    zip_iterator = zip(hemisphere_image_title, hemisphere_image_urls)
+    
+    hemisphere_data_result = []
+
+    for title, url in zip_iterator:
+        hemisphere_data_result.append({
+                'title' : title,
+                'url' : url
+    })    
+    
+    return hemisphere_data_result
+    
     
     #return as a list of dictionaries with the URL string and title of each hemisphere image
     
