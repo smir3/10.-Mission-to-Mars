@@ -1,5 +1,8 @@
 # Byte-compiled / optimized / DLL files
 Practice.ipynb
+mongo.py
+Mission-to-Mars.ipynb
+Mission_to_Mars_Challenge_starter_code.ipynb
 __pycache__/
 *.py[cod]
 *$py.class
