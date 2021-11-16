@@ -19,8 +19,8 @@ def scrape_all():
         "news_paragraph": news_paragraph,
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
-        "last_modified": dt.datetime.now()
-        "hemispheres" : hemisphere_data(browser)
+        "last_modified": dt.datetime.now(),
+        "hemispheres": hemisphere_data(browser)
     }
     
     
@@ -67,6 +67,7 @@ def mars_news(browser):
     
     # Add try/except for error handling
     try:
+
         slide_elem = news_soup.select_one('div.list_text')
         # Use the parent element to find the first 'a' tag and save it as 'news_title'
         news_title = slide_elem.find('div', class_='content_title').get_text()
@@ -96,28 +97,28 @@ def hemisphere_data(browser):
     
     # Next, loop through those links, click the link, find the sample anchor, return the href
     for i in range(len(links)): 
-    try:
+        try:
 
-        links = browser.find_by_css('a.product-item h3')
+            links = browser.find_by_css('a.product-item h3')
 
-        # We have to find the elements on each loop to avoid a stale element exception
-        links[i].click()
+            # We have to find the elements on each loop to avoid a stale element exception
+            links[i].click()
 
-        # Next, we find the Sample image anchor tag and extract the href
-        imgs_href = browser.find_link_by_partial_text('Sample').first['href']
+            # Next, we find the Sample image anchor tag and extract the href
+            imgs_href = browser.find_link_by_partial_text('Sample').first['href']
 
-        # Get Hemisphere title
-        title = browser.find_by_css('h2.title').text
+            # Get Hemisphere title
+            title = browser.find_by_css('h2.title').text
 
-        # Append hemisphere object to list
-        hemisphere_image_urls.append(imgs_href)
-        hemisphere_image_title.append(title)
+            # Append hemisphere object to list
+            hemisphere_image_urls.append(imgs_href)
+            hemisphere_image_title.append(title)
 
-        # Finally, we navigate backwards
-        browser.back()
+            # Finally, we navigate backwards
+            browser.back()
 
-    except:
-        break
+        except:
+            break
 
     zip_iterator = zip(hemisphere_image_title, hemisphere_image_urls)
     
@@ -149,6 +150,7 @@ def featured_image(browser):
 
     # Add try/except for error handling
     try:
+
         # Find the relative image url
         img_url_rel = img_soup.find('img', class_='fancybox-image').get('src')
 
@@ -185,6 +187,7 @@ def featured_image(browser):
 def mars_facts():
     # Add try/except for error handling
     try:
+
         # Use 'read_html' to scrape the facts table into a dataframe
         df = pd.read_html('https://galaxyfacts-mars.com')[0]
 
