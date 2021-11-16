@@ -13,7 +13,7 @@ def scrape_all():
     
     news_title, news_paragraph = mars_news(browser)
 
-    # Run all scraping functions and store results in a dictionary
+    # Run all scraping functions and store results in a dictionary, CREATE A NEW DICTIONARY IN THE DATA DICTIONRARY TO HOLD A LIST WITH URL STRING AND TITLE
     data = {
         "news_title": news_title,
         "news_paragraph": news_paragraph,
@@ -76,6 +76,13 @@ def mars_news(browser):
     return news_title, news_p
 
     # ### Features Images
+
+def hemisphere_data(browser):
+    # Visit URL
+    url = 'https://marshemispheres.com/'
+    browser.visit(url)
+    
+    #return as a list of dictionaries with the URL string and title of each hemisphere image
     
 def featured_image(browser):
     # Visit URL
