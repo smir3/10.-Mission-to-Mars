@@ -17,7 +17,7 @@ mongo = PyMongo(app)
 @app.route("/")
 def index():
    mars = mongo.db.mars.find_one()
-   return render_template("index.html", mars=mars)
+   return render_template("index1.html", mars=mars)
 
 #set up the scraping route which will be the button of the web application which will scrape updated data from the homepage of our web app
 #first line defines the route that flask will be using, define the function def scrape(), assign a new variable that points to Mongo Database mars = mongo.db.mars, hold the newly scraped data mars_data = scraping.scrape_all() this is referencing the scrape_all function int he scraping.py file from jupyter notebook, update the database using .update()
