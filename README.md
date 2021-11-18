@@ -4,3 +4,5 @@ Robin is a data scientist who does freelance astronomy in her free time. She wan
 
 One task deliverable is to use BeautifulSoup and Splinter to build a web application which will scrap data from multiple Mar's websites with the click of a button. This data will be stored in a Mongo database, displayed on a web application using flask, and on a portfolio using bootstrap.
 
+Bootstrap Portfolio transformations: Mobile responsive, underline and bolded titles, and hover-responsive table.
+
